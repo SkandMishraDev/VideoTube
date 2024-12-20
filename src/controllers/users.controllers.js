@@ -160,3 +160,55 @@ try {
 }
 
 })
+
+export const changeCurrentPassword=asyncHandler(async (req,res) => {
+    const {newPassword,oldPassword}=req.body
+    const user=await User.findById(req.user?._id) 
+    const isPasswordCorrect=user.isPasswordCorrect(oldPassword)
+    if(!isPasswordCorrect){
+        throw new ApiError(409,"Invalid Password")
+    }
+    user.password=newPassword;
+    await user.save({validateBeforeSave:false})
+    res.status(200).json({
+        msg:"Your passowrd changed successfully"
+    })
+})
+
+export const getCurrentUser=asyncHandler(async (req,res) => {
+    return res
+    .status(200)
+    .json({
+        user:req.user,
+        msg:"current user fetched successfully"
+    })
+})
+
+export const updateAccountDetails=asyncHandler(async (req,res) => {
+    const {fullNAme,email}=req.body
+
+    if(!fullNAme||!email){
+        throw new ApiError(409,"Fill the details")
+    }
+    const user=await User.findByIdAndUpdate(req.user?._id,{
+        $set:{
+            fullName:fullNAme,
+            email:email
+        },
+    },{
+        new:true
+    }
+).select("-password")
+
+return res.status(200)
+.json({
+    user:user,
+    msg:"Account details updated successfully"
+})
+})
+
+// export const updateUserAvatar=asyncHandler(async (req,res) => {
+//     const avatarL
+// })
+
+// complete using video 18 and from 32 min
