@@ -54,7 +54,6 @@ export const register=asyncHandler(async (req,res) => {
         
 })
 
-
 export const login=asyncHandler(async (req,res) => {
     const {success,data,error}=signInSchema.safeParse(req.body)
     if(!success){
