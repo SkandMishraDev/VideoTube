@@ -3,6 +3,7 @@ import { ApiError } from "../utils/apiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { signInSchema,signUpSchema } from "../validator/user.validator.js";
 import jwt from "jsonwebtoken";
+import {uploadOnCloudinary} from "../utils/cloudinary.js"
 
 const generateAccessAndrefreshToken=async (userId) => {
     try {
