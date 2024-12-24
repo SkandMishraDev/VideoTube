@@ -55,14 +55,14 @@ userSchema.methods.generateAccessToken= function(){
         userName:this.userName    
     },process.env.Access_Token_Secret,
 {
-    expiresIn:"1d "
+    expiresIn:process.env.ACCESS_TOKEN_EXPIRY
 })
 }
 userSchema.methods.generateRefreshToken=function(){
     return jwt.sign({
         _id:this._id,
     },process.env.Refresh_Token_Secret,{
-        expiresIn:"7d"
+        expiresIn:process.env.REFRESH_TOKEN_EXPIRY
     })
 }
 export const User=mongoose.model("User",userSchema)

@@ -3,8 +3,8 @@ import z from "zod"
 const signUpSchema=z.object({
     username:z.string(),
     email:z.string().email(),
-    avatar:z.string().url(),
-    coverImage: z.string().optional(),
+    // avatar:z.string().url(),
+    // coverImage: z.string().optional(),
     password:z.string()
 })
 
